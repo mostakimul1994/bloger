@@ -23,14 +23,12 @@
 
       <div class="container-fluid">
         <div class="row mb-2">
-         <div class="col-sm-6">
-          <h1 class="m-0 text-dark">{{ $title }}</h1>
-        </div>
           @yield('breadcumb')
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+@include('layouts.admin._message')
 
     <!-- Main content -->
     <section class="content">

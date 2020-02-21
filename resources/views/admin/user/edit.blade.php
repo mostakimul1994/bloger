@@ -1,12 +1,15 @@
 @extends('layouts.admin.master')
 @section('breadcumb')
-  <div class="col-sm-6">
-    <ol class="breadcrumb float-sm-right">
-      <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-      <li class="breadcrumb-item"><a href="{{route('user.index')}}">Users</a></li>
-      <li class="breadcrumb-item active">Edit Users</li>
-    </ol>
-  </div><!-- /.col -->
+<div class="col-sm-6">
+  <h1 class="m-0 text-dark">{{ $title }}</h1>
+</div>
+<div class="col-sm-6">
+  <ol class="breadcrumb float-sm-right">
+    <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
+    <li class="breadcrumb-item"><a href="{{route('user.index')}}">Users</a></li>
+    <li class="breadcrumb-item active">Edit Users</li>
+  </ol>
+</div><!-- /.col -->
 
 
 @endsection
