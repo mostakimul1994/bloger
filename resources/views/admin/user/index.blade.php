@@ -22,7 +22,7 @@
                 <table class="table">
                   <thead>
                     <tr>
-                      <th style="width: 10px">#</th>
+                      <th style="width: 10px">Serial</th>
                       <th>Name</th>
                       <th>Email</th>
                       <th>Phone</th>
@@ -52,15 +52,7 @@
               </div>
               <!-- /.card-body -->
             </div>
-                <div class="card-tools">
-                  <ul class="pagination pagination-sm float-left">
-                    <li class="page-item"><a class="page-link" href="#">&laquo;</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">&raquo;</a></li>
-                  </ul>
-                </div>
+                {{$users->render()}}
           </div>
 
         </div>
