@@ -44,13 +44,13 @@
               <li class="nav-item">
                 <a href="{{route('user.store')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>All Users List</p>
+                  <p>Users List</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="{{route('user.create')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Add Users</p>
+                  <p>Add New Users</p>
                 </a>
               </li>
         </ul>

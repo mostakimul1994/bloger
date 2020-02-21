@@ -13,6 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
+        $data['title'] = "Lists of Users";
         $data['users']=User::all();
         return view('admin.user.index',$data);
     }
@@ -24,7 +25,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('admin.user.create');
+        $data['title'] = "Create new User";
+        return view('admin.user.create',$data);
     }
 
     /**
@@ -41,6 +43,7 @@ class UserController extends Controller
             'phone' => 'required|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
+
         $data = $request->all();
         $data['password'] = Hash::make($data['password']);
         User::create($data);
@@ -66,6 +69,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
+        $data['title'] = "Edit User";
         $data['user'] = $user;
         return view('admin.user.edit',$data);
     }
