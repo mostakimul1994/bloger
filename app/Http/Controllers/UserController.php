@@ -14,7 +14,8 @@ class UserController extends Controller
     public function index()
     {
         $data['title'] = "Lists of Users";
-        $data['users']=User::paginate('2');
+        $data['users']=User::paginate('3');
+        $data['serial']=($data['users']->CurrentPage() != 1)?($data['users']->Perpage()*($data['users']->CurrentPage()-1))+1:1;
         return view('admin.user.index',$data);
     }
 
