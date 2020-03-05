@@ -7,7 +7,7 @@
 <div class="col-sm-6">
   <ol class="breadcrumb float-sm-right">
     <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
-    <li class="breadcrumb-item active">All Users Lists</li>
+    <li class="breadcrumb-item active">Category Lists</li>
   </ol>
 </div><!-- /.col -->
 
@@ -18,27 +18,25 @@
         <div class="col-md-12">
             <div class="card">
               <!-- /.card-header -->
-              <div class="card-body p-0">
+              <div class=" card-body p-0">
                 <table class="table">
                   <thead>
                     <tr>
                       <th style="width: 10px">Serial</th>
                       <th>Name</th>
-                      <th>Email</th>
-                      <th>Phone</th>
+                      <th>Status</th>
                       <th>Actions</th>
                    </tr>
                   </thead>
                   <tbody>
-                    @foreach($users as $user)
+                    @foreach($catagories as $category)
                     <tr>
                       <td>{{ $serial++ }}</td>
-                      <td>{{ $user->name }}</td>
-                      <td>{{ $user->email }}</td>
-                      <td>{{ $user->phone }}</td>
+                      <td>{{ $category->name }}</td>
+                      <td>{{ $category->status }}</td>
                       <td>
-                         <a href="{{ route('user.edit',$user->id) }}" class="btn btn-primary btn-sm">Edit</a>
-                         <form action="{{route('user.destroy',$user->id)}}" method="post" accept-charset="utf-8">
+                         <a href="{{ route('category.edit',$category->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                         <form action="{{route('category.destroy',$category->id)}}" method="post" accept-charset="utf-8">
                           @csrf
                           @method('delete')
                           <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
@@ -52,7 +50,7 @@
               </div>
               <!-- /.card-body -->
             </div>
-                {{$users->render()}}
+                {{$catagories->render()}}
           </div>
 
         </div>
