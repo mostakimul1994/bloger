@@ -59,7 +59,8 @@ class AuthorController extends Controller
      */
     public function show(Author $author)
     {
-        //
+        $data['title'] = "Details Author";
+        return view('admin.author.show',$data);
     }
 
     /**
@@ -70,7 +71,9 @@ class AuthorController extends Controller
      */
     public function edit(Author $author)
     {
-        //
+        $data['title'] = "Edit Author";
+        $data['author'] = $author;
+        return view('admin.author.edit',$data);
     }
 
     /**
@@ -82,7 +85,15 @@ class AuthorController extends Controller
      */
     public function update(Request $request, Author $author)
     {
-        //
+          $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$author->id,
+            'phone' => 'required|unique:users,phone,'.$author->id,
+            'status'=>'required',
+        ]);
+        $author->update($request->all());
+        session()->flash('message',"Author Updated Successfully");
+        return redirect()->route('author.index');
     }
 
     /**
@@ -93,6 +104,8 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-        //
+         $author->delete();
+         session()->flash('message',"Deleted Successfully");
+         return redirect()->route('author.index');
     }
 }

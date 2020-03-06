@@ -87,8 +87,8 @@ class UserController extends Controller
     {
          $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$user->id,
-            'phone' => 'required|unique:users,phone,'.$user->id
+            'email' => 'required|email|unique:author,email,'.$user->id,
+            'phone' => 'required|unique:author,phone,'.$user->id,
         ]);
         $user->update($request->all());
         session()->flash('message',"User Updated Successfully");

@@ -37,6 +37,7 @@
                       <td>{{ $author->status }}</td>
                       <td>
                          <a href="{{ route('author.edit',$author->id) }}" class="btn btn-primary btn-sm">Edit</a>
+                         <a href="{{ route('author.show',$author->id) }}" class="btn btn-primary btn-sm">Details</a>
                          <form action="{{route('author.destroy',$author->id)}}" method="post" accept-charset="utf-8">
                           @csrf
                           @method('delete')
