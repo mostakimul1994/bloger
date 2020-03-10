@@ -63,6 +63,7 @@ class AuthorController extends Controller
     public function show(Author $author)
     {
         $data['title'] = "Details Author";
+        $data['author'] = $author;
         return view('admin.author.show',$data);
     }
 
@@ -95,8 +96,14 @@ class AuthorController extends Controller
             'status'=>'required',
         ]); 
         $data = $request->all();
+
         if($request->photo){  
             $data['photo'] = $this->fileUpload($request->photo);
+
+        }
+        if(file_exists($author->photo))
+        {
+            unlink($author->photo);
         }
         $author->update($data);
         session()->flash('message',"Author Updated Successfully");
@@ -117,8 +124,12 @@ class AuthorController extends Controller
      */
     public function destroy(Author $author)
     {
-         $author->delete();
-         session()->flash('message',"Deleted Successfully");
-         return redirect()->route('author.index');
+       if($author->photo && file_exists($author->photo))
+       {
+        unlink($author->photo);
     }
+    $author->delete();
+    session()->flash('message',"Deleted Successfully");
+    return redirect()->route('author.index');
+}
 }
