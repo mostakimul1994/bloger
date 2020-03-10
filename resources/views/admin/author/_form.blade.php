@@ -26,7 +26,13 @@
     <div class="alert alert-danger">{{ $message }}</div>
     @enderror
 </div>
-
+<div class="form-group">
+    <label for="photo">Author Image</label><br>
+    <input type="file" id="photo" name="photo">
+    @error('photo')
+    <div class="alert alert-danger">{{ $message }}</div>
+    @enderror
+</div>
 
 
 <div class="form-group">

@@ -24,7 +24,7 @@
                 </div>
                 <!-- /.card-header -->
                 <!-- form start -->
-                <form role="form" action="{{ route('author.store') }}" method="post">
+                <form role="form" action="{{ route('author.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <div class="card-body">
                         @include('admin.author._form')

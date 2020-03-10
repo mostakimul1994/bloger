@@ -1,10 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Author;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
-
 class AuthorController extends Controller
 {
     /**
@@ -46,7 +45,11 @@ class AuthorController extends Controller
             'phone' => 'required|unique:authors',
             'status'=>'required',
         ]);
-        Author::create($request->all());
+        $data = $request->all();
+        if($request->photo){  
+            $data['photo'] = $this->fileUpload($request->photo);
+        }
+        Author::create($data);
         session()->flash('message',"Author Added Successfully");
         return redirect()->route('author.index');
     }
@@ -90,10 +93,20 @@ class AuthorController extends Controller
             'email' => 'required|email|unique:users,email,'.$author->id,
             'phone' => 'required|unique:users,phone,'.$author->id,
             'status'=>'required',
-        ]);
-        $author->update($request->all());
+        ]); 
+        $data = $request->all();
+        if($request->photo){  
+            $data['photo'] = $this->fileUpload($request->photo);
+        }
+        $author->update($data);
         session()->flash('message',"Author Updated Successfully");
         return redirect()->route('author.index');
+    }
+    private function fileUpload($img){
+        $path = 'images/authors';
+        $img->move($path,$img->getClientOriginalName());
+        $fullpath = $path. '/'. $img->getClientOriginalName();
+        return $fullpath; 
     }
 
     /**
