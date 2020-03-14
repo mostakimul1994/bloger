@@ -111,9 +111,10 @@ class AuthorController extends Controller
     }
     private function fileUpload($img){
         $path = 'images/authors';
-        $img->move($path,$img->getClientOriginalName());
-        $fullpath = $path. '/'. $img->getClientOriginalName();
-        return $fullpath; 
+        $file_name = time().rand(00000 , 99999). '.' .$img->getClientOriginalName();
+        $img->move($path, $file_name);
+        $fullPath = $path. '/'. $file_name;
+        return $fullPath;
     }
 
     /**
