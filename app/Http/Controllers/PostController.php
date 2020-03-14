@@ -24,7 +24,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $data['title'] = "Create New Posts";
+        return view('admin.post.create',$data);
     }
 
     /**
