@@ -22,6 +22,7 @@
                         <tr>
                             <th style="width: 10px">Serial</th>
                             <th>Title</th>
+                            <th>Is Featured</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -31,6 +32,7 @@
                             <tr>
                                 <td>{{ $serial++ }}</td>
                                 <td>{{ $post->title }}</td>
+                                <td>{{ $post->is_featured==1?'Yes':'No' }}</td>
                                 <td>{{ $post->status }}</td>
                                 <td>
                                     <a href="{{ route('post.edit',$post->id) }}" class="btn btn-primary btn-sm">Edit</a>

@@ -42,7 +42,7 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-   {
+    {
         $request->validate([
             'category_id' => 'required',
             'author_id' => 'required',
@@ -74,10 +74,13 @@ class PostController extends Controller
      * @param  \App\Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function show(Post $post)
+        public function show($id)
     {
-        //
+        $data['title'] = 'Post Details';
+        $data['post'] = Post::with('category','author')->findOrFail($id);
+        return view('admin.post.show',$data);
     }
+
 
     /**
      * Show the form for editing the specified resource.
@@ -87,7 +90,11 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $data['title'] = 'Edit  Post';
+        $data['categories'] = Category::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
+        $data['authors'] = Author::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
+        $data['post'] = $post;
+        return view('admin.post.edit',$data);
     }
 
     /**
@@ -99,7 +106,27 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
-        //
+        $request->validate([
+            'category_id' => 'required',
+            'author_id' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+            'status' => 'required',
+        ]);
+        $data = $request->all();
+        if($request->hasFile('image')){
+            $data['image'] = $this->fileUpload($request->image);
+            if($post->image && file_exists($post->image)){
+                unlink($post->image);
+            }
+        }
+        if(!$request->has('is_featured'))
+        {
+            $data['is_featured'] = 0;
+        }
+        $post->update($data);
+        session()->flash('message','Post updated successfully');
+        return redirect()->route('post.index');
     }
 
     /**
@@ -110,6 +137,12 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+       if($post->image && file_exists($post->image)){
+        unlink($post->image);
+    }
+    $post->delete();
+    session()->flash('message','Post deleted successfully');
+    return redirect()->route('post.index');
+
     }
 }
