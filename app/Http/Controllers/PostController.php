@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Post;
+use App\Category;
+use App\Author;
+use Illuminate\Http\File;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -14,7 +16,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $data['title'] = 'List of all posts';
+        $data['posts'] = Post::with('category')->orderBy('id','DESC')->paginate(5);
+        $data['serial'] = ($data['posts']->CurrentPage() != 1)?($data['posts']->Perpage()*($data['posts']->CurrentPage()-1))+1:1;
+        return view('admin.post.index',$data);
     }
 
     /**
@@ -24,7 +29,10 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $data['title'] = 'Create new Post';
+        $data['categories'] = Category::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
+        $data['authors'] = Author::where('status','Active')->orderBy('name','ASC')->pluck('name','id');
+        return view('admin.post.create',$data);
     }
 
     /**
@@ -34,8 +42,30 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
+   {
+        $request->validate([
+            'category_id' => 'required',
+            'author_id' => 'required',
+            'title' => 'required',
+            'details' => 'required',
+            'status' => 'required',
+        ]);
+        $data = $request->all();
+        if($request->hasFile('image')){
+            $data['image'] = $this->fileUpload($request->image);
+        }
+        Post::create($data);
+        session()->flash('message','Post created successfully');
+        return redirect()->route('post.index');
+    }
+
+    private function fileUpload($img)
     {
-        //
+        $path = 'images/posts';
+        $file_name = time().rand(00000,99999).'.'.$img->getClientOriginalExtension();
+        $img->move($path, $file_name);
+        $fullPath = $path . '/' . $file_name;
+        return $fullPath;
     }
 
     /**

@@ -2,8 +2,8 @@
     <!-- Brand Logo -->
     <a href="index3.html" class="brand-link">
       <img src="{{asset('admin/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-           style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      style="opacity: .8">
+      <span class="brand-text font-weight-light">Blog Admin Tamplate</span>
     </a>
 
     <!-- Sidebar -->
@@ -14,7 +14,7 @@
           <img src="{{asset('admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">Mostakimul</a>
         </div>
       </div>
 
@@ -22,8 +22,8 @@
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item">
+           with font-awesome or any other icon font library -->
+           <li class="nav-item">
             <a href="{{ route('dashboard')}}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
@@ -54,9 +54,9 @@
                   <p>Add New Users</p>
                 </a>
               </li>
-        </ul>
-      </li>
-      <li class="nav-item has-treeview">
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -79,9 +79,9 @@
                   <p>Add New Category</p>
                 </a>
               </li>
-        </ul>
-      </li>
-      <li class="nav-item has-treeview">
+            </ul>
+          </li>
+          <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
@@ -104,8 +104,34 @@
                   <p>Add New author</p>
                 </a>
               </li>
-        </ul>
-      </li>
+            </ul>
+          </li>
+
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-copy"></i>
+              <p>
+               Post
+               <i class="fas fa-angle-left right"></i>
+               <span class="badge badge-info right">2</span>
+             </p>
+           </a>
+
+           <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="{{route('post.store')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Post List</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{route('post.create')}}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Add New Post</p>
+              </a>
+            </li>
+          </ul>
+        </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
