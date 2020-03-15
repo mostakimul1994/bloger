@@ -38,7 +38,7 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        
+
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:authors',
@@ -46,13 +46,14 @@ class AuthorController extends Controller
             'status'=>'required',
         ]);
         $data = $request->all();
-        if($request->photo){  
+        if($request->photo){
             $data['photo'] = $this->fileUpload($request->photo);
         }
         Author::create($data);
         session()->flash('message',"Author Added Successfully");
         return redirect()->route('author.index');
     }
+
 
     /**
      * Display the specified resource.
@@ -87,17 +88,16 @@ class AuthorController extends Controller
      * @param  \App\Author  $author
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Author $author)
+   public function update(Request $request, Author $author)
     {
-          $request->validate([
+        $request->validate([
             'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$author->id,
-            'phone' => 'required|unique:users,phone,'.$author->id,
-            'status'=>'required',
-        ]); 
+            'email' => 'required|email|unique:authors,email,'.$author->id,
+            'phone' => 'required|unique:authors,phone,'.$author->id,
+            'status' => 'required',
+        ]);
         $data = $request->all();
-
-        if($request->photo){  
+        if($request->photo){
             $data['photo'] = $this->fileUpload($request->photo);
 
         }
