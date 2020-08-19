@@ -62,7 +62,7 @@ class PostController extends Controller
     private function fileUpload($img)
     {
         $path = 'images/posts';
-        $file_name = time().rand(00000,99999).'.'.$img->getClientOriginalExtension();
+        $file_name = (time().rand(00000,99999)).'.'.$img->getClientOriginalExtension();
         $img->move($path, $file_name);
         $fullPath = $path . '/' . $file_name;
         return $fullPath;
